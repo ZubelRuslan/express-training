@@ -1,10 +1,11 @@
 const Router = require('express').Router
 const usersController = require('./users.controller')
+const auth = require("../middlewares/auth.middleware");
 
 const router = new Router();
 
 router
-  .get('/:id', usersController.getById)
+  .get('/:id', auth, usersController.getById)
   .get('/', usersController.getAll)
   .post('/', (req, res) => {
     res.status(201).send('Created')

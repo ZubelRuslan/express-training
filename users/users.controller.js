@@ -1,4 +1,4 @@
-const usersService = require('./users.service')
+const usersService = require('./users.json.service')
 
 class UsersController {
 
