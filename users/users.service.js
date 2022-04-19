@@ -1,3 +1,5 @@
+import {UserModel} from './models/user.model.js';
+
 class UsersService {
   constructor() {
     this.users = [
@@ -9,8 +11,8 @@ class UsersService {
     ];
   }
 
-  getAll() {
-    return this.users
+  async getAll() {
+    return UserModel.find()
   }
 
   getById(id) {
