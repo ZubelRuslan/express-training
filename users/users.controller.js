@@ -1,4 +1,4 @@
-const usersService = require('./users.json.service')
+import {usersService} from './users.service.js';
 
 class UsersController {
 
@@ -8,8 +8,18 @@ class UsersController {
   getById(req, res) {
     res.send(usersService.getById(req.params.id))
   }
+
+  createUser(req, res) {
+    res.send(usersService.create(req.body))
+  }
+
+  updateUserById(req, res) {
+    res.send(usersService.updateById(req.params.id, req.body))
+  }
+
+  deleteUserById(req, res) {
+    res.send(usersService.deleteById(req.params.id))
+  }
 }
 
-const usersController = new UsersController()
-
-module.exports = usersController
+export const usersController = new UsersController()

@@ -1,6 +1,6 @@
 class UsersService {
   constructor() {
-    this.users =  [
+    this.users = [
       {
         id: 1,
         name: 'Ruslan',
@@ -8,6 +8,7 @@ class UsersService {
       }
     ];
   }
+
   getAll() {
     return this.users
   }
@@ -15,8 +16,16 @@ class UsersService {
   getById(id) {
     return this.users.find(user => user.id.toString() === id.toString())
   }
+
+  create(user) {
+    const dbUser = {
+      ...user,
+      id: new Date().getTime()
+    }
+    this.users.push(dbUser)
+    return dbUser;
+
+  }
 }
 
-const usersService = new UsersService()
-
-module.exports = usersService
+export const usersService = new UsersService()
