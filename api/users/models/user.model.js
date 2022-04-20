@@ -35,4 +35,21 @@ UserSchema.methods = {
   },
 };
 
+UserSchema.statics = {
+  /**
+   * Load
+   *
+   * @param {Object} options
+   * @param {Function} cb
+   * @api private
+   */
+
+  load: function(options, cb) {
+    options.select = options.select || 'name surname _id email';
+    return this.findOne(options.criteria)
+      .select(options.select)
+      .exec(cb);
+  }
+};
+
 export const UserModel = mongoose.model('User', UserSchema);

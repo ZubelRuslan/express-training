@@ -1,21 +1,27 @@
 import jwt from 'jsonwebtoken'
+import {config} from '../config.js';
+import {usersService} from '../api/users/users.service.js';
 
-const auth = (req, res, next) => {
+export const auth = async (req, res, next) => {
   try {
-    const token = req.headers.get('authorization').split(' ')[1]
-    let payload = jwt.verify(token, 'secret')
-    payload = {
-      id: '123456'
-    }
-    const user = DB.findById(payload.id);
-    if (!user || user.isBanned) {
-      res.status(403).send('')
+    const token = req.headers['authorization'].split(' ')[1]
+    if (!token) {
+      res.status(401).send()
       return
     }
-  } catch (e) {
-    res.status(403).send('')
+    const payload = await jwt.verify(token, config.jwtSecret)
+    if (!payload) {
+      res.status(401).send()
+      return
+    }
+    const user = await usersService.getById(payload.userId);
+    if (user) {
+      next()
+    }
+    return
+  } catch {
+    res.status(403).send()
+    return
   }
-
+  res.status(403).send()
 }
-
-module.exports = auth

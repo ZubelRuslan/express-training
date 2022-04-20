@@ -1,5 +1,6 @@
 import {Router} from 'express';
-import {usersRouter} from './users/users.routes.js';
+import {usersRouter} from './api/users/users.routes.js';
+import {authRouter} from './api/auth/auth.routes.js';
 
 /**
  * Root application router. Should be connected to root application path
@@ -19,6 +20,7 @@ const apiRouter = new Router();
  * When new entity will be added it can/should be added in the same way as users entity
  */
 apiRouter.use('/users', usersRouter)
+apiRouter.use('/auth', authRouter)
 
 /**
  * Handle /api requests by apiRouter

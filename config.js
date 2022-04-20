@@ -9,5 +9,6 @@ export const config = {
   dbUri: process.env.DB_URI || 'localhost:27017',
   dbName: process.env.DB_NAME || 'training',
   dbUser: process.env.DB_USER || 'root',
-  dbPass: process.env.DB_PASSWORD || 'example'
+  dbPass: process.env.DB_PASSWORD || 'example',
+  jwtSecret: process.env.JWT_SECRET || 'secret',
 }

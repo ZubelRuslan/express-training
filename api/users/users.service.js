@@ -2,11 +2,11 @@ import {UserModel} from './models/user.model.js';
 
 class UsersService {
   async getAll() {
-    return UserModel.find()
+    return UserModel.find().select('-password_hash')
   }
 
   async getById(id) {
-    return UserModel.findById(id)
+    return UserModel.findById(id).select('-password_hash')
   }
 
   async create(user) {
@@ -19,7 +19,7 @@ class UsersService {
   }
 
   async updateById(id, fieldsToUpdate) {
-    return UserModel.findByIdAndUpdate(id, fieldsToUpdate)
+    return UserModel.findByIdAndUpdate(id, fieldsToUpdate).select('-password_hash')
   }
 
 }
