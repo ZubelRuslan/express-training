@@ -2,23 +2,23 @@ import {usersService} from './users.service.js';
 
 class UsersController {
 
-  getAll(req, res) {
-    res.send(usersService.getAll())
+  async getAll(req, res) {
+    res.send(await usersService.getAll())
   }
-  getById(req, res) {
-    res.send(usersService.getById(req.params.id))
-  }
-
-  createUser(req, res) {
-    res.send(usersService.create(req.body))
+  async getById(req, res) {
+    res.send(await usersService.getById(req.params.id))
   }
 
-  updateUserById(req, res) {
-    res.send(usersService.updateById(req.params.id, req.body))
+  async createUser(req, res) {
+    res.send(await usersService.create(req.body))
   }
 
-  deleteUserById(req, res) {
-    res.send(usersService.deleteById(req.params.id))
+  async updateUserById(req, res) {
+    res.send(await usersService.updateById(req.params.id, req.body))
+  }
+
+  async deleteUserById(req, res) {
+    res.send(await usersService.deleteById(req.params.id))
   }
 }
 

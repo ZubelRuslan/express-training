@@ -1,33 +1,27 @@
 import {UserModel} from './models/user.model.js';
 
 class UsersService {
-  constructor() {
-    this.users = [
-      {
-        id: 1,
-        name: 'Ruslan',
-        surname: 'Zubel'
-      }
-    ];
-  }
-
   async getAll() {
     return UserModel.find()
   }
 
-  getById(id) {
-    return this.users.find(user => user.id.toString() === id.toString())
+  async getById(id) {
+    return UserModel.findById(id)
   }
 
-  create(user) {
-    const dbUser = {
-      ...user,
-      id: new Date().getTime()
-    }
-    this.users.push(dbUser)
-    return dbUser;
-
+  async create(user) {
+    const dbUser = new UserModel(user)
+    return dbUser.save()
   }
+
+  async deleteById(id) {
+    return UserModel.findByIdAndDelete(id)
+  }
+
+  async updateById(id, fieldsToUpdate) {
+    return UserModel.findByIdAndUpdate(id, fieldsToUpdate)
+  }
+
 }
 
 export const usersService = new UsersService()

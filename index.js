@@ -1,10 +1,15 @@
 import express from 'express';
 import { config } from './config.js';
 import {rootRouter} from './routing.js';
+import {initDb} from './db.js';
+import bodyParser from 'body-parser';
 
 const app = express();
 
+app.use(bodyParser.json())
 app.use(rootRouter)
+
+initDb()
 
 app.listen(config.port, () => {
   console.info('server started at port: ' + config.port);
