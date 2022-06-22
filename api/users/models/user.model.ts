@@ -1,5 +1,5 @@
+import { compareSync, hashSync } from 'bcrypt';
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
 
 const UserSchema = new mongoose.Schema({
   name: String,
@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
 })
 
 UserSchema.virtual('password')
-  .set(function(password) {
+  .set(function(password: string) {
     this._password = password;
     this.password_hash = this.encryptPassword(password);
   })
@@ -21,14 +21,14 @@ UserSchema.virtual('password')
   });
 
 UserSchema.methods = {
-  authenticate: function(password) {
-    return bcrypt.compareSync(password, this.password_hash);
+  authenticate: function(password: string) {
+    return compareSync(password, this.password_hash);
   },
 
-  encryptPassword: function(password) {
+  encryptPassword: function(password: string) {
     if (!password) return '';
     try {
-      return bcrypt.hashSync(password, 10);
+      return hashSync(password, 10);
     } catch (err) {
       return '';
     }

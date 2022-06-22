@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import {config} from './config.js';
+import {config} from './config';
+import { connect } from 'mongoose';
 
 const options = {
   autoIndex: false, // Don't build indexes
@@ -15,5 +15,5 @@ const options = {
 };
 
 export const initDb = () => {
-  mongoose.connect(`mongodb://${config.dbUri}/${config.dbName}`, options);
+  void connect(`mongodb://${config.dbUri}/${config.dbName}`, options);
 }

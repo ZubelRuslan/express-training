@@ -1,9 +1,9 @@
-import {UserModel} from '../users/models/user.model.js';
-import jwt from 'jsonwebtoken';
-import {config} from '../../config.js';
+import {UserModel} from '../users/models/user.model';
+import {config} from '../../config';
+import { sign } from 'jsonwebtoken';
 
 class AuthService {
-  async authenticate(email, password) {
+  async authenticate(email: string, password: string) {
     const user = await UserModel.findOne({ email })
     if (user.authenticate(password)) {
       return {
@@ -13,7 +13,7 @@ class AuthService {
           surname: user.surname,
           email: user.email
         },
-        token: await jwt.sign({ userId: user._id }, config.jwtSecret)
+        token: sign({ userId: user._id }, config.jwtSecret)
       }
     } else {
       throw new Error('Invalid credentials')

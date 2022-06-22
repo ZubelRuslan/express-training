@@ -1,10 +1,10 @@
 import {Router} from 'express';
-import {usersController} from './users.controller.js';
-import {validateBody} from '../../middlewares/validation.middleware.js';
-import {CreateUserSchema} from './validationSchemas/createUser.schema.js';
-import {auth} from '../../middlewares/auth.middleware.js';
+import {usersController} from './users.controller';
+import {validateBody} from '../../middlewares/validation.middleware';
+import {CreateUserSchema} from './validationSchemas/createUser.schema';
+import {auth} from '../../middlewares/auth.middleware';
 
-export const usersRouter = new Router();
+export const usersRouter = Router();
 
 usersRouter
   .get('/:id', auth, usersController.getById)

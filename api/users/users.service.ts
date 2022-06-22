@@ -1,24 +1,24 @@
-import {UserModel} from './models/user.model.js';
+import { UserModel } from './models/user.model';
 
 class UsersService {
   async getAll() {
     return UserModel.find().select('-password_hash')
   }
 
-  async getById(id) {
+  async getById(id: string) {
     return UserModel.findById(id).select('-password_hash')
   }
 
-  async create(user) {
+  async create(user: typeof UserModel) {
     const dbUser = new UserModel(user)
     return dbUser.save()
   }
 
-  async deleteById(id) {
+  async deleteById(id: string) {
     return UserModel.findByIdAndDelete(id)
   }
 
-  async updateById(id, fieldsToUpdate) {
+  async updateById(id: string, fieldsToUpdate: Partial<typeof UserModel>) {
     return UserModel.findByIdAndUpdate(id, fieldsToUpdate).select('-password_hash')
   }
 

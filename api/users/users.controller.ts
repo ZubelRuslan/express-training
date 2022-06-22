@@ -1,23 +1,24 @@
-import {usersService} from './users.service.js';
+import {usersService} from './users.service';
+import { Request, Response } from 'express'
 
 class UsersController {
 
-  async getAll(req, res) {
+  async getAll(req: Request, res: Response) {
     res.send(await usersService.getAll())
   }
-  async getById(req, res) {
+  async getById(req: Request, res: Response) {
     res.send(await usersService.getById(req.params.id))
   }
 
-  async createUser(req, res) {
+  async createUser(req: Request, res: Response) {
     res.send(await usersService.create(req.body))
   }
 
-  async updateUserById(req, res) {
+  async updateUserById(req: Request, res: Response) {
     res.send(await usersService.updateById(req.params.id, req.body))
   }
 
-  async deleteUserById(req, res) {
+  async deleteUserById(req: Request, res: Response) {
     res.send(await usersService.deleteById(req.params.id))
   }
 }

@@ -1,6 +1,6 @@
-import dotenv from 'dotenv';
+import { config as dotenv } from 'dotenv';
 
-dotenv.config({
+dotenv({
   path: 'environments/.env.' + process.env.ENV
 })
 
