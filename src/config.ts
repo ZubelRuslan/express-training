@@ -1,7 +1,7 @@
 import { config as dotenv } from 'dotenv';
 
 dotenv({
-  path: 'environments/.env.' + process.env.ENV
+  path: 'src/environments/.env.' + process.env.ENV
 })
 
 export const config = {

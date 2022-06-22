@@ -1,13 +1,20 @@
 import {usersService} from './users.service';
 import { Request, Response } from 'express'
+import { Get, Path, Route } from 'tsoa';
+import { UserDto } from './dto/user.dto';
 
-class UsersController {
+@Route('users')
+export class UsersController {
 
-  async getAll(req: Request, res: Response) {
-    res.send(await usersService.getAll())
+  @Get('/')
+  async getAll():  Promise<UserDto[]>{
+    return usersService.getAll()
   }
-  async getById(req: Request, res: Response) {
-    res.send(await usersService.getById(req.params.id))
+  @Get("{id}")
+  async getById(
+    @Path() id: string
+  ): Promise<UserDto> {
+    return usersService.getById(id)
   }
 
   async createUser(req: Request, res: Response) {
@@ -22,5 +29,3 @@ class UsersController {
     res.send(await usersService.deleteById(req.params.id))
   }
 }
-
-export const usersController = new UsersController()

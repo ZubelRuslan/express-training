@@ -1,3 +1,4 @@
 node_modules
 .idea
-environments/.env.local
+src/environments/.env.local
+public/swagger.json
