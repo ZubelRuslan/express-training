@@ -1,7 +1,8 @@
 import { usersService } from './users.service';
-import { Body, Delete, Get, Path, Post, Put, Route, Security } from 'tsoa';
+import { Body, Delete, Get, Path, Post, Put, Route, Security, Tags } from 'tsoa';
 import { CreateUserDto, UpdateUserDto, UserDto } from './dto/user.dto';
 
+@Tags('User')
 @Route('users')
 export class UsersController {
 

@@ -12,6 +12,7 @@ export interface UserDto {
   surname: string,
   /**
    * User email
+   *
    * @example "ruslan.zubel@itechart-group.com"
    */
   email: string,
