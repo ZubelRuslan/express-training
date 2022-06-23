@@ -1,31 +1,37 @@
-import {usersService} from './users.service';
-import { Request, Response } from 'express'
-import { Get, Path, Route } from 'tsoa';
-import { UserDto } from './dto/user.dto';
+import { usersService } from './users.service';
+import { Body, Delete, Get, Path, Post, Put, Route } from 'tsoa';
+import { CreateUserDto, UpdateUserDto, UserDto } from './dto/user.dto';
 
 @Route('users')
 export class UsersController {
 
   @Get('/')
-  async getAll():  Promise<UserDto[]>{
+  async getAll(): Promise<UserDto[]> {
     return usersService.getAll()
   }
-  @Get("{id}")
+
+  @Get('{id}')
   async getById(
     @Path() id: string
   ): Promise<UserDto> {
     return usersService.getById(id)
   }
 
-  async createUser(req: Request, res: Response) {
-    res.send(await usersService.create(req.body))
+  @Post('/')
+  async createUser(@Body() user: CreateUserDto): Promise<UserDto> {
+    return usersService.create(user)
   }
 
-  async updateUserById(req: Request, res: Response) {
-    res.send(await usersService.updateById(req.params.id, req.body))
+  @Put('{id}')
+  async updateUserById(
+    @Path() id: string,
+    @Body() fieldsToUpdate: UpdateUserDto
+  ): Promise<UserDto> {
+    return usersService.updateById(id, fieldsToUpdate)
   }
 
-  async deleteUserById(req: Request, res: Response) {
-    res.send(await usersService.deleteById(req.params.id))
+  @Delete('{id}')
+  async deleteUserById(@Path() id: string): Promise<string> {
+    return usersService.deleteById(id)
   }
 }

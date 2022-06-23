@@ -1,7 +1,8 @@
 import { compareSync, hashSync } from 'bcrypt';
 import mongoose from 'mongoose';
+import { DbUser } from '../dto/user.dto';
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema<DbUser>({
   name: String,
   surname: String,
   email: {

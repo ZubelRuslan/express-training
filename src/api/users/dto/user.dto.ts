@@ -16,3 +16,15 @@ export interface UserDto {
    */
   email: string,
 }
+
+export interface DbUser extends UserDto{
+  password_hash?: string,
+  authenticate: (pass: string) => boolean
+}
+
+export interface CreateUserDto extends Omit<UserDto, '_id'> {
+  password: string,
+  repeat_password: string
+}
+
+export type UpdateUserDto = Partial<Omit<UserDto, '_id'>>

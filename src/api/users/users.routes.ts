@@ -15,6 +15,12 @@ usersRouter
   .get('/', async (req: Request, res: Response) => {
     return res.send(await usersController.getAll())
   })
-  .post('/', validateBody(CreateUserSchema), usersController.createUser)
-  .put('/:id', auth, usersController.updateUserById)
-  .delete('/:id', auth, usersController.deleteUserById)
+  .post('/', validateBody(CreateUserSchema), async (req: Request, res: Response) => {
+    return res.send(await usersController.createUser(req.body))
+  })
+  .put('/:id', auth, async (req: Request, res: Response) => {
+    return res.send(await usersController.updateUserById(req.params.id, req.body))
+  })
+  .delete('/:id', auth, async (req: Request, res: Response) => {
+    return res.send(await usersController.deleteUserById(req.params.id))
+  })

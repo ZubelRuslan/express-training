@@ -2,3 +2,4 @@ node_modules
 .idea
 src/environments/.env.local
 public/swagger.json
+dist

@@ -1,6 +1,7 @@
 import Joi from 'joi'
+import { CreateUserDto } from '../dto/user.dto';
 
-export const CreateUserSchema = Joi.object({
+export const CreateUserSchema = Joi.object<CreateUserDto>({
   name: Joi.string()
     .alphanum()
     .min(2)
