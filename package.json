@@ -5,7 +5,8 @@
   "main": "dist/index.ts",
   "scripts": {
     "start:prod": "ENV=prod node dist/index.js",
-    "start:dev": "concurrently \"ENV=local nodemon\" \"nodemon -x tsoa spec\"",
+    "start:dev": "concurrently \"ENV=dev nodemon\" \"nodemon -x tsoa spec\"",
+    "start:local": "concurrently \"ENV=local nodemon\" \"nodemon -x tsoa spec\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "swagger": "tsoa spec",
     "build": "tsc"

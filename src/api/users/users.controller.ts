@@ -1,5 +1,5 @@
 import { usersService } from './users.service';
-import { Body, Delete, Get, Path, Post, Put, Route, Security, Tags } from 'tsoa';
+import { Body, Delete, Get, Path, Post, Put, Route, Security, Tags, UploadedFile } from 'tsoa';
 import { CreateUserDto, UpdateUserDto, UserDto } from './dto/user.dto';
 
 @Tags('User')
@@ -38,5 +38,11 @@ export class UsersController {
   @Delete('{id}')
   async deleteUserById(@Path() id: string): Promise<string> {
     return usersService.deleteById(id)
+  }
+
+  @Security('jwt')
+  @Put('{id}/uploadAvatar')
+  async uploadAvatar(@Path() id: string, @UploadedFile('avatar') file: Express.Multer.File): Promise<UserDto> {
+    return usersService.getById(id)
   }
 }
