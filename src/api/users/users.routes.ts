@@ -9,10 +9,10 @@ export const usersRouter = Router();
 const usersController = new UsersController();
 
 usersRouter
-  .get('/:id', async (req: Request, res: Response) => {
+  .get('/:id', auth, async (req: Request, res: Response) => {
     return res.send(await usersController.getById(req.params.id))
   })
-  .get('/', async (req: Request, res: Response) => {
+  .get('/', auth, async (req: Request, res: Response) => {
     return res.send(await usersController.getAll())
   })
   .post('/', validateBody(CreateUserSchema), async (req: Request, res: Response) => {

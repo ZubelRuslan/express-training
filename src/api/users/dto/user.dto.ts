@@ -17,7 +17,7 @@ export interface UserDto {
   email: string,
 }
 
-export interface DbUser extends UserDto{
+export interface DbUser extends UserDto {
   password_hash?: string,
   authenticate: (pass: string) => boolean
 }

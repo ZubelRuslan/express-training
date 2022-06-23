@@ -1,15 +1,17 @@
 import { usersService } from './users.service';
-import { Body, Delete, Get, Path, Post, Put, Route } from 'tsoa';
+import { Body, Delete, Get, Path, Post, Put, Route, Security } from 'tsoa';
 import { CreateUserDto, UpdateUserDto, UserDto } from './dto/user.dto';
 
 @Route('users')
 export class UsersController {
 
+  @Security('jwt')
   @Get('/')
   async getAll(): Promise<UserDto[]> {
     return usersService.getAll()
   }
 
+  @Security('jwt')
   @Get('{id}')
   async getById(
     @Path() id: string
@@ -22,6 +24,7 @@ export class UsersController {
     return usersService.create(user)
   }
 
+  @Security('jwt')
   @Put('{id}')
   async updateUserById(
     @Path() id: string,
@@ -30,6 +33,7 @@ export class UsersController {
     return usersService.updateById(id, fieldsToUpdate)
   }
 
+  @Security('jwt')
   @Delete('{id}')
   async deleteUserById(@Path() id: string): Promise<string> {
     return usersService.deleteById(id)

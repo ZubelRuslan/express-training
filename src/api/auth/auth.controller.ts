@@ -1,9 +1,12 @@
 import {authService} from './auth.service';
-import { Request, Response } from 'express';
+import { Body, Post, Route } from 'tsoa';
+import { AuthenticatedUserDataDto, CredentialsDto } from './dto/auth.dto';
 
+@Route('auth')
 class AuthController {
-  async authenticate(req: Request, res: Response) {
-    res.send(await authService.authenticate(req.body.email, req.body.password))
+  @Post('/login')
+  async authenticate(@Body() creds: CredentialsDto): Promise<AuthenticatedUserDataDto> {
+    return  authService.authenticate(creds.email, creds.password)
   }
 }
 
