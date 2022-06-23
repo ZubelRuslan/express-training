@@ -9,7 +9,8 @@ const UserSchema = new mongoose.Schema<DbUser>({
     type: String,
     unique: true
   },
-  password_hash: String
+  password_hash: String,
+  avatar: String
 })
 
 UserSchema.virtual('password')

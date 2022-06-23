@@ -43,6 +43,6 @@ export class UsersController {
   @Security('jwt')
   @Put('{id}/uploadAvatar')
   async uploadAvatar(@Path() id: string, @UploadedFile('avatar') file: Express.Multer.File): Promise<UserDto> {
-    return usersService.getById(id)
+    return usersService.updateById(id, { avatar: file.path })
   }
 }

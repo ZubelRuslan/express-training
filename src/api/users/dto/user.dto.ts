@@ -16,6 +16,11 @@ export interface UserDto {
    * @example "ruslan.zubel@itechart-group.com"
    */
   email: string,
+
+  /**
+   * Path to avatar image
+   */
+  avatar?: string
 }
 
 export interface DbUser extends UserDto {
