@@ -1,7 +1,7 @@
 import { UserModel } from './models/user.model';
 import { CreateUserDto, DbUser, UpdateUserDto, UserDto } from './dto/user.dto';
 
-class UsersService {
+export class UsersService {
   async getAll(): Promise<UserDto[]> {
     return UserModel.find().select('-password_hash')
   }

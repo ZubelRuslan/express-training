@@ -5,7 +5,7 @@ import express = require('express');
 import { config } from './config';
 import swaggerUi from 'swagger-ui-express'
 
-const app = express();
+export const app = express();
 
 app.use(json())
 app.use(express.static('public'))
